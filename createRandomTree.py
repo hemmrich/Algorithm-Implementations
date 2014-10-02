@@ -29,7 +29,7 @@ def createTree(root, numElts):
 def getBinaryTree(numElts, randSeed):
     random.seed(randSeed)
     root = Node(random.randrange(0, 21))
-    createTree(root, 20)
+    createTree(root, numElts)
     return root
     
 
