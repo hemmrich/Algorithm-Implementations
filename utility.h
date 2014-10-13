@@ -1,4 +1,5 @@
-void swap(int*, int, int);
+template<typename T>
+void swap(T*, T, T);
 
 void printArray(int*, int, bool);
 

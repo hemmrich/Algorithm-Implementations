@@ -1,9 +1,11 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
-void swap(int* array, int j, int k) {
-    int tmp = array[j];
+template<typename T>
+void swap(T* array, T j, T k) {
+    T tmp = array[j];
     array[j] = array[k];
     array[k] = tmp;
 }
