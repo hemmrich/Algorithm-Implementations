@@ -35,6 +35,46 @@ Inheritance diamond - fix by making middle level class Tiger : virtual public An
 need virtual destructor to ensure that subclass destructors are called when using polymorphism
 
 
+Problems:
+1) Given unsorted array, determine how many pairs of numbers add to X
+   Approach 1: Sort array (nlogn), ptr to beginning and end, if sum is too small, advance beginning ptr, if too large, move end backwards
+   Approach 2: Put all elements in to hashtable (n), travserse through and see if x - HT[i] is in hashtable (n)
+
+
+2) Lowest common ancestor of binary tree
+   Approach: Inorder traversal, postorder traversal
+             create list of all elements between X and Y in inorder traversal
+             the element in the list above that is closest to end of postorder is the LCA
+
+
+
+
+MATHWORKS
+
+#define X 10 -> preprocessor directive, gets replaced before compilation
+
+Mealy State Machine- output based on both state and input
+Moore State Machine- output based only on state
+
+bits needed for ROM = 2^(state bits + inputs) entries of (state bits + outputs)
+
+Finite automata
+Sigma - alphabet
+Q - set of states
+delta - set of transitions between stats
+q0 - initial state
+F - set of accept states
+
+Pidgenhole principle - if N objects are placed into k boxes, then there is at least 
+one box containing at least ceil(N/k) objects
+
+
+
+
+
+
+
+
 
 Fastest way to find largest element in circular sorted array?
 
@@ -55,8 +95,6 @@ Implement own hashtable?
 Implement itoa?
 
 Initialize function pointer?
-
-Reverse a linked list recursively?
 
 
 
