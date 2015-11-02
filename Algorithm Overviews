@@ -1,0 +1,288 @@
+Algorithm High-Level Solutions:
+
+-------------------------------------------------------------------------------
+1) Given unsorted array, determine how many pairs of numbers add to X
+
+        O(n^2) - two for loops to generate all pairs, check if each pair sums to X
+        O(nlogn) - sort array, traverse the array from both ends (i = 0->n, j = n->0)
+                 - if arr[i] + arr[j] > X, decrement j
+                   if arr[i] + arr[j] = X, increment counter (try moving both i and j)
+                   if arr[i] + arr[j] < X, increment i
+        O(n) - add all values in array to hash map
+             - for each value in hashmap, check if X - map[val] is in map
+                -if yes, increment counter
+                  else, continue
+
+-------------------------------------------------------------------------------
+2) Lowest common ancestor of two binary tree nodes
+    
+    If we know height/depth of current location
+        - Bring up lower node to same level as higher level
+        - Move both up one node at a time, checking equality of nodes after each move
+        - O(n) - logn (O(n) worst) to get each height, logn (O(n) worst) to find LCA
+
+    If we don't know height
+        - Recursive solution - base case is if node == NULL, return NULL
+        - Start at root - if node1 == root || node2 == root, root is LCA
+        - Recursive call on node->left, node->right
+        - If both recursive calls return true, current node is the LCA
+        - Else, left or right subtree contains LCA (if left == NULL, LCA is right)
+        - O(n) - visit every node at most once
+
+-------------------------------------------------------------------------------
+3) Fastest way to find largest element in circular sorted array?
+
+    Can be done with binary search in O(logn) time
+        - Largest element will be only element with smaller number to its rightb
+-------------------------------------------------------------------------------
+4) Given a BST and int n, find the most efficient way to find 2 nodes that sum to n?
+
+    O(n^2) - create all pairs of BST and check if they sum to n
+    O(n) - in-order traversal to create sorted array
+         - can check if 2 nodes sum up to n in O(n/2) time (similar to #1 nlogn solution)
+         - requires O(n) extra space
+-------------------------------------------------------------------------------
+5) Convert a max-heap to a min-heap
+-------------------------------------------------------------------------------
+6) Create mirror of binary tree
+
+    O(n) time, O(n) space - create new (empty) tree, copy mirror of original into new tree
+        - new_node = node
+          new_node->left = node->right
+          new_node->right = node->left
+          mirror(new_node->left)
+          mirror(new_node->right)
+
+    O(n) time, O(1) space - swap right and left children in place
+        - tmp = node->left
+          node->left = node->right
+          node->right = tmp
+          mirror(node->left)
+          mirror(node->right)
+
+-------------------------------------------------------------------------------
+7) Implement itoa
+
+    If num == 0, return '0\0'
+    If num < 0 and base == 10, set bool negative = true and num = -num (- only for base 10)
+    While(num)
+        rem = num % base
+        str += (rem > 9) ? (rem - 10) + 'a' : rem + '0'
+        num = num / base
+    if negative, str += '-'
+    return reverse(str)
+    
+-------------------------------------------------------------------------------
+8) Implement hashtable
+-------------------------------------------------------------------------------
+9) Reverse linked list
+
+    O(n) - use 3 pointers - prev (initially NULL), cur (initially HEAD), next (initially HEAD->next)
+         - while cur != NULL
+            - next = cur-> next
+            - cur->next = prev
+            - prev = cur
+            - cur = next
+-------------------------------------------------------------------------------
+10) Inorder and postorder traverse tree (iteratively and recursively)
+
+    Recursively:
+    inorder_traverse(node)
+        if(node == nullptr) return;
+
+        inorder_traverse(node->left)
+        visit_node(node)
+        inorder_traverse(node->right)
+
+
+    postorder_traverse(node)
+        if(node == nullptr) return;
+
+        postorder_traverse(node->left)
+        postorder_traverse(node->right)
+        visit_node(node)
+
+    Inorder of BST gives non-decreasing array
+    Postorder is order of deleting a tree
+        -> delete children before deleting parent
+
+-------------------------------------------------------------------------------
+11) Remove duplicates in an array
+
+    O(n^2) - see if a number is duplicated in the rest of the array, remove it if it is
+    O(nlogn) - sort array using mergesort, don't merge duplicates in merge step
+    O(n) time, O(n) space - keep track of which elements have been seen in the array
+
+-------------------------------------------------------------------------------
+12) Find number of continents (connected groups of 1) in pixel map of 0s and 1s
+
+    Each continent is a connected component in a graph -> use BFS/DFS to find components
+
+    O(n^2) - Use DFS (dfs marks neighboring 1s as visited)
+           - for(int i = 0; i < cols; i++)
+                for(int j = 0; j < rows; j++)
+                    if(!visited(arr[i][j]) && arr[i][j] == 1) {
+                        counter++;
+                        dfs(arr[i][j]);
+                        mark_visited(arr[i][j]);
+                    }
+            return counter;
+
+-------------------------------------------------------------------------------
+13) Convert integers to roman numerals
+-------------------------------------------------------------------------------
+14) Reverse words of a string (this is a test -> siht si a tset)
+   
+    O(n) - use two pointers to reverse each word individually
+
+    DO THIS TOMORROW
+
+
+
+ -------------------------------------------------------------------------------
+15) Reverse cstring (this is a test -> tset a si siht)
+    
+    O(n) - use two pointers to swap characters
+
+         while(first < last) {
+            char tmp = *last;
+            *last = *first;  
+            *first = tmp;
+
+            first++;
+            last--;
+         }
+
+
+-------------------------------------------------------------------------------
+16) Reverse string except for spaces (" a if" -> " f ia")
+-------------------------------------------------------------------------------
+17) Recursively return list of files given root directory node
+-------------------------------------------------------------------------------
+18) Given two rectangles, check if they intersect
+    
+    - Check if any of the points of one rectangle are within the other
+    OR
+    - Rectangles don't intersect if one is above the top edge of the other or one 
+    is to the left of the other's left edge
+
+-------------------------------------------------------------------------------
+19) Implement strtok
+-------------------------------------------------------------------------------
+20) Find first repeating string in a large text file
+-------------------------------------------------------------------------------
+21) Subset sum problem
+-------------------------------------------------------------------------------
+22) Find start of a loop in a linked list
+-------------------------------------------------------------------------------
+23) Skyline problem
+-------------------------------------------------------------------------------
+24) Implement atoi
+-------------------------------------------------------------------------------
+25) Check if two lines intersect given their end points
+-------------------------------------------------------------------------------
+26) Replace each space with "%20" in string
+-------------------------------------------------------------------------------
+27) Determine all repeats in an array
+-------------------------------------------------------------------------------
+28) Find all palindromes in a given string
+-------------------------------------------------------------------------------
+29) O(n^3) algorithm for finding longest palindrome in string
+-------------------------------------------------------------------------------
+30) O(n^2) algorithm for finding longest palindrome in string
+-------------------------------------------------------------------------------
+31) O(nlogn) algorithm for finding longest palindrome in string
+-------------------------------------------------------------------------------
+32) Given an array of stock prices for a day, determine when to buy/sell for maximum profit
+-------------------------------------------------------------------------------
+33) Make a copy of a binary tree and transfer it over the network (and unpack at other end)
+-------------------------------------------------------------------------------
+34) Efficient way of finding if two strings are anagrams
+-------------------------------------------------------------------------------
+35) Solve arithmetic of string (ie. '2 + 3 * 6')
+-------------------------------------------------------------------------------
+36) Implement a stack with a get_max() function
+-------------------------------------------------------------------------------
+37) Find continuous subset of array with largest sum
+-------------------------------------------------------------------------------
+38) Remove duplicates from a vector
+-------------------------------------------------------------------------------
+39) DFS (iterative or recursive)
+-------------------------------------------------------------------------------
+40) BFS (iterative or recursive)
+-------------------------------------------------------------------------------
+41) Merge sorted array of length n with sorted array that has n empty spots to right
+-------------------------------------------------------------------------------
+42) Given a linked list with a data field, next pointer, and random pointer (points to null or an elt 
+in list), write a function to return a copy of the list without destructively modifying the original list
+-------------------------------------------------------------------------------
+43) Given pre-order traversal result and in-order traversal result of a tree, recover the tree
+-------------------------------------------------------------------------------
+44) Determine if a binary tree is a BST
+-------------------------------------------------------------------------------
+45) Given vector<vector<string>>, compute all possible combinations of strings taking exactly one 
+string from each vector
+-------------------------------------------------------------------------------
+46) Compress a string ("aaabbcccccz" -> "3a2b5c1z"), returning the original if original <= compressed
+-------------------------------------------------------------------------------
+47) Determine if two strings are anagrams
+-------------------------------------------------------------------------------
+48) Given an array of size n with numbers 1 to n+1, determine which number is missing
+
+    - Find expected sum: n(n+1)/2 => n+1(n+2)/2
+      Iterate through array and subtract current value from expected
+      Expected at the end is the missing number
+
+    - Using XOR (still O(n), but no chance of integer overflow)
+      XOR all array elements => X1
+      XOR all numbers from 1 to n+1 => X2
+      XOR X1 and X2 => missing number
+-------------------------------------------------------------------------------
+49) Given an array of size (m - n + 1) with numbers n to m+1, determine which number is missing
+-------------------------------------------------------------------------------
+50) Print last N lines of a file
+-------------------------------------------------------------------------------
+51) Quicksort
+-------------------------------------------------------------------------------
+52) Mergesort
+-------------------------------------------------------------------------------
+53) Insertion sort
+-------------------------------------------------------------------------------
+54) Selection sort
+-------------------------------------------------------------------------------
+55) Maximum number of points on a line
+-------------------------------------------------------------------------------
+56) Find 2nd largest element in BST
+-------------------------------------------------------------------------------
+57) Given a big array, how to efficiently find k’th largest element in it?
+
+    Build a min-heap of the first k elements. For the k+1 -> nth elts, compare with
+    the root of the min-heap.
+        - If elt > root, root = elt, heapfiy(min-heap)
+          Else, ignore it
+        - Min-heap will contain k largest elements, with the root being the kth largest element
+
+58) Find size of largest contininent in 2D array of 0s and 1s
+-------------------------------------------------------------------------------
+
+
+
+
+
+
+-------------------------------------------------------------------------------
+
+
+
+//answers:
+
+simple O(N^3) algorithm: for every pair of begin-end indexes, check if it's a palindrome, and update the current max palindrome. O(n^2): all palindromes have a center. the center can either be a chacracer, or can be between characters (if it's an even-length palindrome). thus there are 2N-1 possible palindrome centers. for every such center, symmetrically extend the indexes left and right until it's no longer a palindrome. take the maximum length one. this is O(N^2) because there are O(N) centers and you invest at most O(N) for each center.. no easy O(NlogN) solution came to my mind…
+
+
+Given a linked list with three fields: a data field, a next field and a random pointer field (which is a field that points to null or to an element in the linked list) write a function to return a copy of the linked list without destructively modifying the original linked list 
+The O(n) time and O(n) space complexity solution is pretty straightforward. For that solution if you have the following list A->B->C (for simplicity, I don't have the random field here right now) then you first create the nodes A'->B'->C' and then create a hashmap mapping A to A' etc, this hashmap is needed because then you can initialize the random field of each node in O(1) time. This wasn't what they wanted though, there is an O(n) time O(1) space complexity solution that destructively modifies the original linked list but then restores it to its original state at the end. Using this method, first you interleave all the nodes so you get A->A'->B->B'->C->C' and then initializing the random pointers in the new nodes takes O(1) time. Draw it out and you'll see how it works.
+
+The first one is maximum subset sum and the second one is to write a program to transpose a matrix
+
+Given pre-order traversal result and in-order traversal result of a tree, recovery the tree. Given N computers, how to connect them, how to check two computers are connected. 
+Here is the recursive solution to the problem: private TreeNode parseToBT(String preOrder, String str) { TreeNode root; if (str.length() == 1) { return new TreeNode(null, null, str); } else { char ch = preOrder.charAt(elementsVisited); root = new TreeNode(null, null, ch); int index = str.indexOf(ch); String left = str.substring(0, index); if (left.length() > 0) { elementsVisited++; root.setLeftChildNode(parseToBT(preOrder, left)); } String right = str.substring(index + 1); if (right.length() > 0) { elementsVisited++; root.setRightChildNode(parseToBT(preOrder, right)); } } return root; }
