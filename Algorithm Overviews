@@ -33,7 +33,7 @@ Algorithm High-Level Solutions:
 3) Fastest way to find largest element in circular sorted array?
 
     Can be done with binary search in O(logn) time
-        - Largest element will be only element with smaller number to its rightb
+        - Largest element will be only element with smaller number to its right
 -------------------------------------------------------------------------------
 4) Given a BST and int n, find the most efficient way to find 2 nodes that sum to n?
 
@@ -74,6 +74,12 @@ Algorithm High-Level Solutions:
     
 -------------------------------------------------------------------------------
 8) Implement hashtable
+
+    -Make class with templated key (K) and value (V)
+    -Private - large array of <list> of V
+    -Need hash function that returns a large prime number
+    -To determine where in the array a key fits, mod hash by array size
+    -Forward chaining to solve collisions
 -------------------------------------------------------------------------------
 9) Reverse linked list
 
@@ -204,6 +210,11 @@ Algorithm High-Level Solutions:
 36) Implement a stack with a get_max() function
 -------------------------------------------------------------------------------
 37) Find continuous subset of array with largest sum
+    
+    O(n) solution: keep track of start of subset, end of subset, subset val
+        -If adding the next element increases subset val, add to subset
+            -If subset val > max_subset, update max subset metadata
+        -Else, reset subset to 0 and start over
 -------------------------------------------------------------------------------
 38) Remove duplicates from a vector
 -------------------------------------------------------------------------------
